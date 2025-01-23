@@ -16,23 +16,25 @@ export default function Register() {
 
   const registerUser = async (e) => {
     e.preventDefault()
-    const {name, email,passowrd} =data
+    const {name, email,password} =data
     try {
       const {data} = await axios.post('/register', {
-        name, email,passowrd
+        name, email,password
       })
 
       if(data.error){
         toast.error(data.error)
       }else{
-        setData({})
-        toast.success(response.data.message);
-        naviagate('/login')
+        setData({name: '', email: '', password: ''})
+        toast.success('User Registered Successfully');
+        navigate('/login');
 
       }
       
     } catch (error) {
-      toast.error(error.response.data.message || 'Registration failed.');
+      toast.error(
+        error.response?.data?.message || 'Registration failed. Please try again.'
+      );
     }
     
   };
