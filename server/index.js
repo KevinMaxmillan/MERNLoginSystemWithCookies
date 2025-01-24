@@ -15,7 +15,9 @@ mongoose.connect(process.env.MONGO_URI, {
 //middleware
 const app = express();
 app.use(express.json());
-
+app.use(cookieParser());
+app.use(cors({ credentials: true, origin: 'http://localhost:5173' }));
+app.use(express.urlencoded({extended: false}))
 
 //routes
 app.use('/', require('./routes/authRoutes'));

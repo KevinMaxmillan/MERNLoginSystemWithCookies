@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-
+import API from '../api/ApiInstance'
+import "../styles/Login.css";
 export default function Login() {
   const navigate = useNavigate();
   const [data, setData] = useState({
@@ -17,12 +17,12 @@ export default function Login() {
     const { email, password } = data;
 
     try {
-      const { data: response } = await axios.post('/login', { email, password });
+      const { data: response } = await API.post('/login', data);
 
       if (response.error) {
         toast.error(response.error);
       } else {
-        setData({ email: '', password: '' }); 
+        localStorage.setItem('accessToken', response.accessToken);
         toast.success('User Logged In Successfully');
         navigate('/');
       }
@@ -32,7 +32,8 @@ export default function Login() {
   };
 
   return (
-    <div>
+    <div className="login-container">
+    <div className="login-card">
       <h2>Login</h2>
       <form onSubmit={loginUser}>
         <label>Email</label>
@@ -51,8 +52,11 @@ export default function Login() {
           onChange={(e) => setData({ ...data, password: e.target.value })}
         />
 
-        <button type="submit">Log In</button>
+        <button type="submit" className="login-button">
+          Log In
+        </button>
       </form>
     </div>
+  </div>
   );
 }
