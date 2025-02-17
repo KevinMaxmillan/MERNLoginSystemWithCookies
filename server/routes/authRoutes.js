@@ -1,12 +1,14 @@
-const express = require('express');
+import express from 'express';
+import { registerUser, loginUser, getProfile, logoutUser } from '../controllers/authController.js';
+import { refreshToken } from '../controllers/tokenController.js';
+import { authMiddleware } from '../middleware/authMiddleware.js';
+
 const router = express.Router();
-const { registerUser, loginUser, getProfile, logoutUser } = require('../controllers/authController');
-const { refreshToken } = require('../controllers/tokenController');
 
 router.post('/register', registerUser);
 router.post('/login', loginUser);
 router.get('/refresh', refreshToken);
-router.get('/profile', getProfile);
+router.get("/profile", authMiddleware, getProfile);
 router.post('/logout', logoutUser);
 
-module.exports = router;
+export default router;

@@ -1,29 +1,37 @@
-const express = require('express');
-const dotenv = require('dotenv').config();
-const mongoose = require('mongoose');
-const cors = require('cors');
-const cookieParser = require('cookie-parser');
+import express from 'express';
+import 'dotenv/config';
+import cors from 'cors';
+import cookieParser from 'cookie-parser';
+import morgan from 'morgan';
+import colors from 'colors';
+import connectDB from './config/db.js';
+import errorHandler from './middleware/errorHandler.js';
+import authRoutes from './routes/authRoutes.js';
 
 
-//database
-mongoose.connect(process.env.MONGO_URI, {
+connectDB();
 
-})
-.then(() => console.log('MongoDB Connected...'))
-.catch(err => console.log('MongoDB Connected...',err));
- 
-//middleware
+
 const app = express();
+
+// Middleware
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({ credentials: true, origin: 'http://localhost:5173' }));
-app.use(express.urlencoded({extended: false}))
+app.use(express.urlencoded({ extended: false }));
+app.use(morgan('dev'));
 
-//routes
-app.use('/', require('./routes/authRoutes'));
+// Routes
+app.use('/', authRoutes);
 
-//server start
-const port = 8000;
-app.listen(port, () => console.log(`Server is running on port ${port}`));
+// 404 Not Found Handler
+app.use('*', (req, res) => {
+    res.status(404).json({ error: 'Route not found' });
+});
 
+// Error Handling Middleware
+app.use(errorHandler);
 
+// Start Server
+const PORT = process.env.PORT || 8000;
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`.green));

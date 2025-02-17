@@ -1,24 +1,29 @@
+import { createContext, useState, useEffect, useContext } from "react";
+import authService from "../services/authServices";
 
-// import { createContext, useState, useEffect } from "react";
-// import API from "../api/ApiInstance";
+const UserContext = createContext();
 
-// export const UserContext = createContext({});
+export const UserProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
 
-// export function UserContextProvider({ children }) {  
-//     const [user, setUser] = useState(null);
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const data = await authService.getProfile();
+        setUser(data);
+      } catch (error) {
+        console.error("Error fetching profile:", error);
+      }
+    };
 
-//     useEffect(() => {
-//         if (!user) {
-//             API.get('/profile')
-//                 .then(({ data }) => {
-//                     setUser(data);
-//                 })
-//                 .catch(error => console.error("Error fetching profile:", error)); 
-//         }
-//     }, [user]); 
-//     return (
-//         <UserContext.Provider value={{ user, setUser }}>
-//             {children}
-//         </UserContext.Provider>
-//     );
-// }
+    fetchProfile();
+  }, []);
+
+  return (
+    <UserContext.Provider value={{ user, setUser }}>
+      {children}
+    </UserContext.Provider>
+  );
+};
+
+export const useUser = () => useContext(UserContext);

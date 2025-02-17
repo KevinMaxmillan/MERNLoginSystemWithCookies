@@ -45,7 +45,15 @@ const authService = {
     }
   },
 
-  
+  logout: async () => {
+    try {
+      await API.post("/logout"); 
+      localStorage.removeItem("accessToken"); 
+      return true;
+    } catch (error) {
+      throw error.response?.data?.message || "Logout failed. Please try again.";
+    }
+  }
 
 
 };

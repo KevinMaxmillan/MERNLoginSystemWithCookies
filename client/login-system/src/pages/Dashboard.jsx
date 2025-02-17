@@ -1,24 +1,8 @@
-import { useEffect, useState } from "react";
-import authService from "../services/authServices";
-import { useNavigate } from "react-router-dom";
+
+import { useUser } from "../context/UserContext";
 
 export default function Dashboard() {
-  const [user, setUser] = useState(null);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchUserProfile = async () => {
-      try {
-        const profile = await authService.getProfile();
-        setUser(profile); 
-      } catch (error) {
-        console.error(error);
-        navigate("/login"); 
-      }
-    };
-
-    fetchUserProfile();
-  }, []);
+  const { user } = useUser(); 
 
   return (
     <div className="dashboard-container">

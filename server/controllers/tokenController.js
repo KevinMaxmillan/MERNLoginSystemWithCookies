@@ -1,16 +1,13 @@
-const jwt = require('jsonwebtoken');
-const User = require('../models/user');
-
+import jwt from 'jsonwebtoken';
+import User from '../models/user.js';
 
 const generateAccessToken = (user) => {
-    return jwt.sign({ id: user._id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '20s' });
+    return jwt.sign({ id: user._id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '10s' });
 };
-
 
 const generateRefreshToken = (user) => {
-    return jwt.sign({ id: user._id }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '5m' });
+    return jwt.sign({ id: user._id }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '7d' });
 };
-
 
 const generateTokens = (user) => {
     const accessToken = generateAccessToken(user);
@@ -19,7 +16,7 @@ const generateTokens = (user) => {
 };
 
 // Authenticate Token 
-const authenticateToken = (req, res, next) => {
+export const authenticateToken = (req, res, next) => {
     const authHeader = req.headers.authorization;
     const token = authHeader && authHeader.split(' ')[1];
     if (!token) return res.sendStatus(401);
@@ -32,37 +29,32 @@ const authenticateToken = (req, res, next) => {
 };
 
 // Refresh Token
-const refreshToken = async (req, res) => {
+export const refreshToken = async (req, res) => {
     try {
         const { refreshToken } = req.cookies;
-        if (!refreshToken) return res.status(401).json({ error: 'Refresh token missing.' });
+        if (!refreshToken) throw { status: 401, message: 'Refresh token missing' };
 
-        
         jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, async (err, decoded) => {
-            if (err) return res.status(403).json({ error: 'Invalid refresh token.' });
+            if (err) throw { status: 403, message: 'Invalid refresh token' };
 
-            
             const user = await User.findById(decoded.id);
             if (!user || user.refreshToken !== refreshToken) {
-                return res.status(403).json({ error: 'Refresh token does not match.' });
+                throw { status: 403, message: 'Refresh token does not match' };
             }
 
-            console.log("accesss token generated")
+            console.log("Access token generated");
             
             const newAccessToken = generateAccessToken(user);
             res.cookie('accessToken', newAccessToken, { httpOnly: true, secure: true, path: '/' });
-            res.json({ accessToken: newAccessToken });
+            res.json({ message: "Token refreshed" });
         });
     } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: 'Error refreshing token.' });
+        next(err);
     }
 };
 
-module.exports = {
+export {
     generateAccessToken,
     generateRefreshToken,
-    generateTokens,
-    authenticateToken,
-    refreshToken
+    generateTokens
 };
