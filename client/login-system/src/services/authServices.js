@@ -1,16 +1,11 @@
 import API from "../api/ApiInstance";
 
 const authService = {
-  getAccessToken: () => localStorage.getItem("accessToken"),
 
-  setAccessToken: (token) => localStorage.setItem("accessToken", token),
-
-  removeAccessToken: () => localStorage.removeItem("accessToken"),
 
   refreshToken: async () => {
     try {
       const { data } = await API.get("/refresh");
-      authService.setAccessToken(data.accessToken);
       return data.accessToken;
     } catch (error) {
      
@@ -44,11 +39,9 @@ const authService = {
       throw error.response?.data?.message || "Failed to fetch profile.";
     }
   },
-
   logout: async () => {
     try {
       await API.post("/logout"); 
-      localStorage.removeItem("accessToken"); 
       return true;
     } catch (error) {
       throw error.response?.data?.message || "Logout failed. Please try again.";

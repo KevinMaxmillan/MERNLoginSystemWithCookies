@@ -1,13 +1,20 @@
 import jwt from 'jsonwebtoken';
+import asyncHandler from 'express-async-handler';
 
-export const authMiddleware = (req, res, next) => {
-    const token = req.cookies?.accessToken;
-    if (!token) throw { status: 401, message: 'Unauthorized' };
+export const authMiddleware = asyncHandler((req, res, next) => {
+    const accessToken = req.cookies?.accessToken;
+ 
 
-    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
+        if (!accessToken) throw { status: 401, message: 'Unauthorized' };
+        
+
+    jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
         if (err) throw { status: 403, message: 'Invalid or expired token' };
 
         req.user = decoded;
         next();
     });
-};
+        
+   
+    
+});

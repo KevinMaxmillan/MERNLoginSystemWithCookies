@@ -1,17 +1,16 @@
 import axios from "axios";
 import { BASE_URL } from "../utils/config";
 import authService from "../services/authServices";
-import { useNavigate } from "react-router-dom";
+import useAuthStore from "../store/authStore";
+
 
 const API = axios.create({
   baseURL: BASE_URL,
   withCredentials: true,
 });
 
-const navigateToLogin = () => {
-  const navigate = useNavigate();
-  navigate("/login"); 
-};
+
+
 
 API.interceptors.response.use(
   (response) => response,
@@ -22,13 +21,17 @@ API.interceptors.response.use(
           originalRequest._retry = true;
           try {
               await authService.refreshToken();
+              await useAuthStore.getState().fetchProfile();
               return API(originalRequest);
           } catch (refreshError) {
-              authService.logout();
-              navigateToLogin();
-              return Promise.reject(refreshError);
+            console.error("Token refresh failed:", refreshError);
+            useAuthStore.getState().logout();
+            window.location.href = "/login";
+            return Promise.reject(refreshError);
           }
       }
+
+      
 
       return Promise.reject(error);
   }

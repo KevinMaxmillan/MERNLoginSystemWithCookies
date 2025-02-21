@@ -19,7 +19,6 @@ export default function Login() {
       if (response.error) {
         toast.error(response.error);
       } else {
-        authService.setAccessToken(response.accessToken);
         toast.success("User Logged In Successfully");
 
         const userProfile = await authService.getProfile();

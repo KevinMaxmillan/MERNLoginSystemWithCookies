@@ -2,12 +2,12 @@ import express from 'express';
 import 'dotenv/config';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-import morgan from 'morgan';
-import colors from 'colors';
 import connectDB from './config/db.js';
 import errorHandler from './middleware/errorHandler.js';
 import authRoutes from './routes/authRoutes.js';
-
+import morganLogger from './config/morganLogger.js'; 
+import logger from './config/logger.js';
+import corsOptions from './config/corsConfig.js';
 
 connectDB();
 
@@ -17,9 +17,9 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ credentials: true, origin: 'http://localhost:5173' }));
+app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: false }));
-app.use(morgan('dev'));
+app.use(morganLogger);
 
 // Routes
 app.use('/', authRoutes);
@@ -34,4 +34,12 @@ app.use(errorHandler);
 
 // Start Server
 const PORT = process.env.PORT || 8000;
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`.green));
+app.listen(PORT, () => {
+    logger.info(`Server is running on port ${PORT}`);
+});
+
+//issues
+
+//refreshtoken saved in the database ==> in the case of restart the server it is authorized and logged in. 
+//shows the logout button.
+//directly not loading the profle page

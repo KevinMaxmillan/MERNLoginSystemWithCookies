@@ -1,17 +1,19 @@
-
-import { useUser } from "../context/UserContext";
+import { useEffect } from "react";
+import useAuthStore from "../store/authStore";
 
 export default function Dashboard() {
-  const { user } = useUser(); 
+  const { user, fetchProfile } = useAuthStore();
+
+  useEffect(() => {
+    if (!user) fetchProfile(); 
+  }, [user, fetchProfile]);
 
   return (
     <div className="dashboard-container">
       <h1>Welcome to the Dashboard</h1>
-      {user ? (
-        <h2>Hello, {user.name} 👋</h2>
-      ) : (
-        <p>Loading user data...</p>
-      )}
+      {user ? <h2>Hello, {user.name} 👋</h2> : <p>Loading user data...</p>}
     </div>
   );
 }
+
+

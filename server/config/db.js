@@ -1,16 +1,18 @@
 import mongoose from 'mongoose';
+import asyncHandler from 'express-async-handler';
+import logger from '../config/logger.js';
 
-const connectDB = async () => {
+const connectDB = asyncHandler(async () => {
     try {
         await mongoose.connect(process.env.MONGO_URI, {
             // useNewUrlParser: true,
             // useUnifiedTopology: true
         });
-        console.log('MongoDB Connected...');
+        logger.info('MongoDB Connected...');
     } catch (err) {
-        console.error('MongoDB Connection Error:', err);
+        logger.error('MongoDB Connection Error:', err);
         process.exit(1);
     }
-};
+});
 
 export default connectDB;

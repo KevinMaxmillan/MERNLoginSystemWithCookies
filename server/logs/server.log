@@ -1,0 +1,10 @@
+{"level":"info","message":"Server is running on port 8000","timestamp":"2025-02-19T06:40:03.059Z"}
+{"level":"info","message":"Server is running on port 8000","timestamp":"2025-02-19T06:40:42.085Z"}
+{"level":"info","message":"Server is running on port 8000","timestamp":"2025-02-19T06:40:47.847Z"}
+{"level":"info","message":"Server is running on port 8000","timestamp":"2025-02-19T06:40:54.141Z"}
+{"level":"info","message":"POST /login 200 132.502 ms Wed, 19 Feb 2025 06:42:42 GMT","timestamp":"2025-02-19T06:42:42.187Z"}
+{"level":"info","message":"GET /profile 304 6.470 ms Wed, 19 Feb 2025 06:42:42 GMT","timestamp":"2025-02-19T06:42:42.198Z"}
+{"level":"info","message":"GET /profile 304 6.459 ms Wed, 19 Feb 2025 06:42:50 GMT","timestamp":"2025-02-19T06:42:50.986Z"}
+{"level":"info","message":"GET /refresh 304 12.830 ms Wed, 19 Feb 2025 07:41:03 GMT","timestamp":"2025-02-19T07:41:03.166Z"}
+{"level":"info","message":"GET /profile 200 6.404 ms Wed, 19 Feb 2025 07:41:03 GMT","timestamp":"2025-02-19T07:41:03.178Z"}
+{"level":"info","message":"POST /logout 200 3.747 ms Wed, 19 Feb 2025 07:41:06 GMT","timestamp":"2025-02-19T07:41:06.493Z"}

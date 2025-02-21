@@ -1,0 +1,26 @@
+2025-02-19 13:20:50 [[32MINFO[39M] Server is running on port 8000
+2025-02-19 13:21:00 [[33MWARN[39M] 401 - Invalid credentials
+2025-02-19 13:21:00 [[31MERROR[39M] POST /login 401 100.918 ms Wed, 19 Feb 2025 07:51:00 GMT
+2025-02-19 13:21:13 [[32MINFO[39M] POST /login 200 134.010 ms Wed, 19 Feb 2025 07:51:13 GMT
+2025-02-19 13:21:13 [[32MINFO[39M] GET /profile 304 8.674 ms Wed, 19 Feb 2025 07:51:13 GMT
+2025-02-19 13:21:21 [[32MINFO[39M] GET /profile 304 7.484 ms Wed, 19 Feb 2025 07:51:21 GMT
+2025-02-19 13:21:32 [[32MINFO[39M] POST /logout 200 18.177 ms Wed, 19 Feb 2025 07:51:32 GMT
+[36m2025-02-19 13:22:37[39m [[32mINFO[39m] [35mServer is running on port 8000[39m
+[36m2025-02-19 13:22:48[39m [[33mWARN[39m] [35m401 - Invalid credentials[39m
+[36m2025-02-19 13:22:48[39m [[31mERROR[39m] [35mPOST /login 401 96.999 ms Wed, 19 Feb 2025 07:52:48 GMT[39m
+[36m2025-02-19 13:23:11[39m [[32mINFO[39m] [35mPOST /login 200 92.480 ms Wed, 19 Feb 2025 07:53:11 GMT[39m
+[36m2025-02-19 13:23:11[39m [[32mINFO[39m] [35mGET /profile 304 7.531 ms Wed, 19 Feb 2025 07:53:11 GMT[39m
+[36m2025-02-19 13:23:17[39m [[32mINFO[39m] [35mGET /profile 304 10.860 ms Wed, 19 Feb 2025 07:53:17 GMT[39m
+[36m2025-02-19 13:26:41[39m [[32mINFO[39m] [35mServer is running on port 8000[39m
+[36m2025-02-19 13:26:49[39m [[32mINFO[39m] [35mServer is running on port 8000[39m
+[36m2025-02-19 13:26:53[39m [[32mINFO[39m] [35mPOST /logout 200[39m
+[36m2025-02-19 13:27:04[39m [[33mWARN[39m] [35m400 - Name is required.[39m
+[36m2025-02-19 13:27:04[39m [[31mERROR[39m] [35mPOST /register 400[39m
+[36m2025-02-19 13:29:08[39m [[33mWARN[39m] [35m400 - Password is required.[39m
+[36m2025-02-19 13:29:08[39m [[31mERROR[39m] [35mPOST /register 400[39m
+[36m2025-02-19 13:29:31[39m [[32mINFO[39m] [35mServer is running on port 8000[39m
+[36m2025-02-19 13:32:21[39m [[32mINFO[39m] [35mServer is running on port 8000[39m
+[36m2025-02-19 15:02:57[39m [[32mINFO[39m] [35mServer is running on port 8000[39m
+[36m2025-02-19 15:02:57[39m [[32mINFO[39m] [35mMongoDB Connected...[39m
+[36m2025-02-19 15:03:11[39m [[32mINFO[39m] [35mServer is running on port 8000[39m
+[36m2025-02-19 15:03:11[39m [[32mINFO[39m] [35mMongoDB Connected...[39m
