@@ -1,32 +1,22 @@
-import React, { useState } from 'react';
-import { toast } from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
-import authService from '../services/authServices';
+import React, { useState } from "react";
+import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import useAuthStore from "../store/authStore";
 import "../styles/Login.css";
 
 export default function Login() {
   const navigate = useNavigate();
-  const [data, setData] = useState({
-    email: '',
-    password: ''
-  });
+  const { login } = useAuthStore(); 
+  const [data, setData] = useState({ email: "", password: "" });
 
   const loginUser = async (e) => {
     e.preventDefault();
     try {
-      const response = await authService.login(data);
-
-      if (response.error) {
-        toast.error(response.error);
-      } else {
-        toast.success("User Logged In Successfully");
-
-        const userProfile = await authService.getProfile();
-
-        navigate("/dashboard", { state: { user: userProfile } });
-      }
+      await login(data);
+      toast.success("User Logged In Successfully");
+      navigate("/dashboard");
     } catch (error) {
-      toast.error(error);
+      toast.error(error.response?.data?.message || "Login failed. Please try again.");
     }
   };
 

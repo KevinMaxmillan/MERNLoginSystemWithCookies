@@ -5,8 +5,8 @@ export default function Dashboard() {
   const { user, fetchProfile } = useAuthStore();
 
   useEffect(() => {
-    if (!user) fetchProfile(); 
-  }, [user, fetchProfile]);
+    fetchProfile();
+  }, [fetchProfile]);
 
   return (
     <div className="dashboard-container">
@@ -15,5 +15,3 @@ export default function Dashboard() {
     </div>
   );
 }
-
-

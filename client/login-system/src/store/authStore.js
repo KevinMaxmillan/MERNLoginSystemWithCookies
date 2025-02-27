@@ -5,6 +5,7 @@ const useAuthStore = create((set) => ({
   user: null,
   isAuth: false,
 
+
   setUser: (userData) => set({ user: userData, isAuth: !!userData }),
 
   fetchProfile: async () => {
@@ -20,7 +21,8 @@ const useAuthStore = create((set) => ({
   login: async (credentials) => {
     try {
       const response = await authService.login(credentials);
-      await useAuthStore.getState().fetchProfile(); 
+      const userProfile = await authService.getProfile();
+      set({ user: userProfile, isAuth: true });
       return response;
     } catch (error) {
       throw error;
@@ -36,5 +38,8 @@ const useAuthStore = create((set) => ({
     }
   },
 }));
+
+
+//should i store the access token here
 
 export default useAuthStore;
