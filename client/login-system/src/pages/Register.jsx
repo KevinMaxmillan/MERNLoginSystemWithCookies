@@ -7,6 +7,7 @@ import "../styles/Register.css";
 export default function Register() {
   const navigate = useNavigate();
   const [data, setData] = useState({
+    numericId: '',
     name: '',
     email: '',
     password: ''
@@ -20,12 +21,12 @@ export default function Register() {
       if (response.error) {
         toast.error(response.error);
       } else {
-        setData({ name: '', email: '', password: '' });
+        setData({ numericId: '', name: '', email: '', password: '' });
         toast.success("User Registered Successfully");
         navigate('/login');
       }
     } catch (error) {
-      toast.error(error);
+      toast.error(error.response?.data?.message || "Registration failed. Please try again.");
     }
   };
 
@@ -34,6 +35,11 @@ export default function Register() {
       <div className="register-card">
         <h2>Register</h2>
         <form onSubmit={registerUser}>
+          
+          <label>ID</label>
+          <input type="text" placeholder="ID" value={data.numericId} onChange={(e) => setData({ ...data, numericId: e.target.value })} />
+
+
           <label>Name</label>
           <input type="text" placeholder="Name" value={data.name} onChange={(e) => setData({ ...data, name: e.target.value })} />
 

@@ -5,7 +5,7 @@ import useAuthStore from "../store/authStore";
 
 const API = axios.create({
   baseURL: BASE_URL,
-  withCredentials: true, 
+  withCredentials: true,
 });
 
 API.interceptors.response.use(
@@ -16,12 +16,13 @@ API.interceptors.response.use(
       originalRequest._retry = true;
       try {
         const newAccessToken = await authService.refreshToken();
+        useAuthStore.getState().setAccessToken(newAccessToken);
         originalRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
         return API(originalRequest);
       } catch (refreshError) {
         console.error("Token refresh failed:", refreshError);
-        useAuthStore.getState().logout();
-        window.location.href = "/login"; 
+        useAuthStore.getState().logoutUser();
+        window.location.href = "/login";
         return Promise.reject(refreshError);
       }
     }

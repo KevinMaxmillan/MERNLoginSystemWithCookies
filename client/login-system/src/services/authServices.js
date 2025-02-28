@@ -1,54 +1,36 @@
 import API from "../api/ApiInstance";
 
 const authService = {
-
-
   refreshToken: async () => {
-    try {
-      const { data } = await API.get("/refresh");
-      return data.accessToken;
-    } catch (error) {
-     
-      throw error;
-    }
+    const { data } = await API.get("/refresh");
+    return data.accessToken;
   },
 
   register: async (userData) => {
-    try {
-      const { data } = await API.post("/register", userData);
-      return data;
-    } catch (error) {
-      throw error.response?.data?.message || "Registration failed. Please try again.";
-    }
+    const { data } = await API.post("/register", userData);
+    return data;
   },
 
   login: async (credentials) => {
-    try {
-      const { data } = await API.post("/login", credentials);
-      return data;
-    } catch (error) {
-      throw error.response?.data?.message || "Login failed. Please try again.";
-    }
+    const { data } = await API.post("/login", credentials);
+    return data;
   },
 
   getProfile: async () => {
-    try {
-      const { data } = await API.get("/profile");
-      return data;
-    } catch (error) {
-      throw error.response?.data?.message || "Failed to fetch profile.";
-    }
+    const { data } = await API.get("/profile");
+    return data;
   },
+
   logout: async () => {
-    try {
-      await API.post("/logout"); 
-      return true;
-    } catch (error) {
-      throw error.response?.data?.message || "Logout failed. Please try again.";
-    }
-  }
-
-
+    await API.post("/logout");
+    return true;
+  },
+  
+  fetchTodos: async (numericId) => {
+    const { data } = await API.get(`https://jsonplaceholder.typicode.com/todos?userId=${numericId}`);
+    return data;
+  },
+  
 };
 
 export default authService;

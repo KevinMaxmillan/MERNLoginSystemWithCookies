@@ -7,8 +7,9 @@ import { hashPassword, comparePassword } from '../middleware/hashedPassword.js';
 // Register user
 export const registerUser = asyncHandler(async (req, res, next) => {
     
-        const { name, email, password } = req.body;
+        const { numericId, name, email, password } = req.body;
 
+        if (!numericId) throw { status: 400, message: 'numericId is required.' };
         if (!name) throw { status: 400, message: 'Name is required.' };
         if (!password) throw { status: 400, message: 'Password is required.' };
         if (password.length < 6) throw { status: 400, message: 'Password must be at least 6 characters' };
@@ -17,7 +18,7 @@ export const registerUser = asyncHandler(async (req, res, next) => {
         if (existingUser) throw { status: 400, message: 'Email already exists.' };
 
         const hashedPassword = await hashPassword(password);
-        const user = await User.create({ name, email, password: hashedPassword });
+        const user = await User.create({ numericId, name, email, password: hashedPassword });
 
         return res.status(201).json({ message: 'User registered successfully', user });
     
