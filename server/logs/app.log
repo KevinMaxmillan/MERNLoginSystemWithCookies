@@ -24,3 +24,23 @@
 [36m2025-02-19 15:02:57[39m [[32mINFO[39m] [35mMongoDB Connected...[39m
 [36m2025-02-19 15:03:11[39m [[32mINFO[39m] [35mServer is running on port 8000[39m
 [36m2025-02-19 15:03:11[39m [[32mINFO[39m] [35mMongoDB Connected...[39m
+[36m2025-03-01 18:55:50[39m [[32mINFO[39m] [35mServer is running on port 8000[39m
+[36m2025-03-01 18:55:50[39m [[32mINFO[39m] [35mMongoDB Connected...[39m
+[36m2025-03-01 19:17:33[39m [[33mWARN[39m] [35m403 - Invalid or expired token[39m
+[36m2025-03-01 19:17:33[39m [[31mERROR[39m] [35mGET /profile 403[39m
+[36m2025-03-01 19:19:06[39m [[32mINFO[39m] [35mServer is running on port 8000[39m
+[36m2025-03-01 19:19:06[39m [[32mINFO[39m] [35mMongoDB Connected...[39m
+[36m2025-03-01 19:19:11[39m [[33mWARN[39m] [35m403 - Invalid or expired token[39m
+[36m2025-03-01 19:19:11[39m [[31mERROR[39m] [35mGET /profile 403[39m
+[36m2025-03-01 19:19:51[39m [[32mINFO[39m] [35mServer is running on port 8000[39m
+[36m2025-03-01 19:19:51[39m [[32mINFO[39m] [35mMongoDB Connected...[39m
+[36m2025-03-01 19:19:59[39m [[33mWARN[39m] [35m403 - Invalid or expired token[39m
+[36m2025-03-01 19:19:59[39m [[31mERROR[39m] [35mGET /profile 403[39m
+[36m2025-03-01 19:20:45[39m [[32mINFO[39m] [35mServer is running on port 8000[39m
+[36m2025-03-01 19:20:45[39m [[32mINFO[39m] [35mMongoDB Connected...[39m
+[36m2025-03-01 19:21:03[39m [[33mWARN[39m] [35m403 - Invalid or expired token[39m
+[36m2025-03-01 19:21:03[39m [[31mERROR[39m] [35mGET /profile 403[39m
+[36m2025-03-01 19:21:53[39m [[32mINFO[39m] [35mServer is running on port 8000[39m
+[36m2025-03-01 19:21:53[39m [[32mINFO[39m] [35mMongoDB Connected...[39m
+[36m2025-03-01 19:21:56[39m [[33mWARN[39m] [35m403 - Invalid or expired token[39m
+[36m2025-03-01 19:21:56[39m [[31mERROR[39m] [35mGET /profile 403[39m

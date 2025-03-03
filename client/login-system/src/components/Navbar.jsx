@@ -1,5 +1,4 @@
 import { Link, useNavigate } from "react-router-dom";
-import "../styles/Navbar.css";
 import { useLogout, useProfile } from "../hooks/useAuth";
 
 export default function Navbar() {

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import authService from '../services/authServices';
-import "../styles/Register.css";
+
 
 export default function Register() {
   const navigate = useNavigate();

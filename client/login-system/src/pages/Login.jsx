@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { useLogin } from "../hooks/useAuth";
-import "../styles/Login.css";
+
 
 export default function Login() {
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ export default function Login() {
   };
 
   return (
-    <div className="login-container">
+    <div className="container">
       <div className="login-card">
         <h2>Login</h2>
         <form onSubmit={loginUser}>
